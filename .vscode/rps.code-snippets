@@ -1,0 +1,116 @@
+{
+  "SH-Bang": {
+    "prefix": "#!",
+    "body": ["#!/bin/bash"]
+  },
+  "Infinite While": {
+    "prefix": "while",
+    "body": ["while [ $1 ]; do", "\t$2", "done"]
+  },
+  "User Input": {
+    "prefix": "pri",
+    "body": [
+      "printf \"Enter your choice (1-Rock, 2-Paper, 3-Scissors): \"",
+      "read USER"
+    ]
+  },
+  "Game Win Message": {
+    "prefix": "game-",
+    "body": [
+      "game-win-message() {",
+      "  echo \"---------------------------\"",
+      "  echo \"        SCOREBOARD\"",
+      "  echo \"---------------------------\"",
+      "  echo \" Your Score: \\$USER_SCORE \"",
+      "  echo \" Comp Score: \\$COMP_SCORE \"",
+      "  echo \"---------------------------\"",
+      "  if [ \\$USER_SCORE -lt \\$COMP_SCORE ]; then",
+      "    echo \"########################\"",
+      "    echo \"### Computer won !!! ###\"",
+      "    echo \"########################\"",
+      "  else",
+      "    echo \"###################\"",
+      "    echo \"### You won !!! ###\"",
+      "    echo \"###################\"",
+      "  fi",
+      "}"
+    ]
+  },
+  "Number to string": {
+    "prefix": "num2",
+    "body": [
+      "num2string() {",
+      "  [ \"\\$1\" == \"1\" ] && printf \"Rock\"",
+      "  [ \"\\$1\" == \"2\" ] && printf \"Paper\"",
+      "  [ \"\\$1\" == \"3\" ] && printf \"Scissors\"",
+      "}"
+    ]
+  },
+  "You won round message": {
+    "prefix": "you-won",
+    "body": [
+      "you-won-message() {",
+      "  echo",
+      "  echo \"  You won !!!\"",
+      "  echo",
+      "  USER_SCORE=$((\\$USER_SCORE + 1))",
+      "}"
+    ]
+  },
+  "Comp won round message": {
+    "prefix": "comp-won",
+    "body": [
+      "comp-won-message() {",
+      "  echo",
+      "  echo \"  Computer won !!!\"",
+      "  echo",
+      "  COMP_SCORE=$((\\$COMP_SCORE + 1))",
+      "}"
+    ]
+  },
+  "Round win message": {
+    "prefix": "round",
+    "body": [
+      "round-win-message() {",
+      "  local USER=\\$1",
+      "  local COMP=\\$2",
+      "  [ \"\\$COMP\" == \"\\$USER\" ] && echo \"It's a DRAW\" && return",
+      "  if [ \"\\$COMP\" == \"Rock\" ]; then",
+      "    [ \"\\$USER\" == \"Paper\" ] && you-won-message || comp-won-message",
+      "  fi",
+      "  if [ \"\\$COMP\" == \"Paper\" ]; then",
+      "    [ \"\\$USER\" == \"Scissors\" ] && you-won-message || comp-won-message",
+      "  fi",
+      "  if [ \"\\$COMP\" == \"Scissors\" ]; then",
+      "    [ \"\\$USER\" == \"Rock\" ] && you-won-message || comp-won-message",
+      "  fi",
+      "  CHANCES=$((\\$CHANCES + 1))",
+      "}"
+    ]
+  },
+  "Validate User": {
+    "prefix": "validate",
+    "body": [
+      "validate-user() {",
+      "  re='^[1-3]$'",
+      "  while ! [[ \\$USER_NUM =~ \\$re ]]; do",
+      "    echo \"INVALID INPUT\"",
+      "    ask-user",
+      "  done",
+      "}"
+    ]
+  },
+  "COMP NUM": {
+    "prefix": "CO",
+    "body": ["COMP_NUM=$((\\$RANDOM % 3 + 1))"]
+  },
+  "USER Convert": {
+    "prefix": "US",
+    "body": [
+      "USER=\"\\$(num2string \\$USER_NUM)\"",
+      "COMP=\"\\$(num2string \\$COMP_NUM)\"",
+      "echo \"You  chose \\${USER}\"",
+      "echo \"Comp chose \\${COMP}\""
+    ]
+  }
+}
