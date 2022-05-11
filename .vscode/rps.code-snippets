@@ -112,5 +112,14 @@
       "echo \"You  chose \\${USER}\"",
       "echo \"Comp chose \\${COMP}\""
     ]
+  },
+  "Ask User": {
+    "prefix": "ask",
+    "body": [
+      "ask-user() {",
+      "  printf \"Enter your choice (1-Rock, 2-Paper, 3-Scissors): \"",
+      "  read USER_NUM",
+      "}"
+    ]
   }
 }
